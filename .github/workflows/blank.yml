@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: "0 16 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download
+        shell: bash
+        run: |
+        
+          rm *.zip
+          
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=951
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=351
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=1051
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=1182
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=329
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=953
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=1199
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=663
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=661
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=1125
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=842
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=1180
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=1079
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=1219
+          wget --content-disposition http://www.mindmotion.com.cn/getfile.aspx?id=1218
+
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.9.1
+        with:
+          push_options: '--force'
